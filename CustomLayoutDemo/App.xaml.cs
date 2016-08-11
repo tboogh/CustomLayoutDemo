@@ -1,5 +1,6 @@
 ﻿using Prism.Unity;
 using CustomLayoutDemo.Views;
+using Xamarin.Forms;
 
 namespace CustomLayoutDemo
 {
@@ -9,11 +10,12 @@ namespace CustomLayoutDemo
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("MainPage?title=Hello%20from%20Xamarin.Forms");
+            NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainPage)}");
         }
 
         protected override void RegisterTypes()
         {
+            Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
             Container.RegisterTypeForNavigation<SemiStackLayoutPage>();
         }

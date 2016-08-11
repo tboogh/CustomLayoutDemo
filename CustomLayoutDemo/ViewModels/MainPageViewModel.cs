@@ -4,6 +4,8 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using CustomLayoutDemo.Views;
 
 namespace CustomLayoutDemo.ViewModels
 {
@@ -14,7 +16,7 @@ namespace CustomLayoutDemo.ViewModels
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            NextCommand = new DelegateCommand(Next);
+            NextCommand = DelegateCommand.FromAsyncHandler(Next);
         }
 
         public DelegateCommand NextCommand { get; }
@@ -29,9 +31,9 @@ namespace CustomLayoutDemo.ViewModels
             
         }
 
-        private void Next()
+        private async Task Next()
         {
-            _navigationService.NavigateAsync($"{nameof(SemiStackLayoutPage)}");
+            await _navigationService.NavigateAsync($"{nameof(SemiStackLayoutPage)}");
         }
     }
 }
