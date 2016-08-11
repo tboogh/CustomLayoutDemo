@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:layouts="clr-namespace:CustomLayoutDemo.Layouts;assembly=CustomLayoutDemo"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="CustomLayoutDemo.Views.SemiStackLayoutPage">
+  <layouts:SemiStackLayout>
+    <layouts:SemiStackLayout.TopView>
+      <BoxView BackgroundColor="#FF5353" HeightRequest="100"/>
+    </layouts:SemiStackLayout.TopView>
+    <layouts:SemiStackLayout.MiddleView>
+      <BoxView BackgroundColor="#5858C9" HeightRequest="200" />
+    </layouts:SemiStackLayout.MiddleView>
+    <layouts:SemiStackLayout.BottomView>
+      <BoxView BackgroundColor="#D14CD0"  HeightRequest="300"/>
+    </layouts:SemiStackLayout.BottomView>
+    <layouts:SemiStackLayout.LowerRightView>
+      <Button Command="{Binding NextCommand}" Text="Next"></Button>
+    </layouts:SemiStackLayout.LowerRightView>
+
+  </layouts:SemiStackLayout>
+</ContentPage>

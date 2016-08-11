@@ -19,7 +19,7 @@
             </layouts:CornerLayout.LowerLeftView>
             <layouts:CornerLayout.LowerRightView>
                 <!--<BoxView BackgroundColor="#76DC7B" />-->
-              <Label Text="Hello, World!" BackgroundColor="#8576CC" TextColor="#7CEBEB" Margin="0, 10, 10, 20"></Label>
+              <Button Command="{Binding NextCommand}" Text="Next"></Button>
             </layouts:CornerLayout.LowerRightView>
 
         </layouts:CornerLayout>

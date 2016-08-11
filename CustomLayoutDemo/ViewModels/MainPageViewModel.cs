@@ -9,17 +9,15 @@ namespace CustomLayoutDemo.ViewModels
 {
     public class MainPageViewModel : BindableBase, INavigationAware
     {
-        private string _title;
-        public string Title
+        private readonly INavigationService _navigationService;
+
+        public MainPageViewModel(INavigationService navigationService)
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            _navigationService = navigationService;
+            NextCommand = new DelegateCommand(Next);
         }
 
-        public MainPageViewModel()
-        {
-
-        }
+        public DelegateCommand NextCommand { get; }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
@@ -28,8 +26,12 @@ namespace CustomLayoutDemo.ViewModels
 
         public void OnNavigatedTo(NavigationParameters parameters)
         {
-            if (parameters.ContainsKey("title"))
-                Title = (string)parameters["title"] + " and Prism";
+            
+        }
+
+        private void Next()
+        {
+            _navigationService.NavigateAsync($"{nameof(SemiStackLayoutPage)}");
         }
     }
 }

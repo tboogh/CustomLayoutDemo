@@ -15,6 +15,7 @@ namespace CustomLayoutDemo
         protected override void RegisterTypes()
         {
             Container.RegisterTypeForNavigation<MainPage>();
+            Container.RegisterTypeForNavigation<SemiStackLayoutPage>();
         }
     }
 }

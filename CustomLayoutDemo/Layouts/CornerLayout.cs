@@ -7,29 +7,29 @@ using Xamarin.Forms;
 
 namespace CustomLayoutDemo.Layouts
 {
-    public class CornerLayout : Layout<View>
+    public class SemiStackLayout : Layout<View>
     {
-        public static BindableProperty UpperLeftViewProperty = BindableProperty.Create(nameof(UpperLeftView), typeof(View), typeof(CornerLayout), propertyChanged:ViewPropertyChanged);
-        public static BindableProperty UpperRightViewProperty = BindableProperty.Create(nameof(UpperRightView), typeof(View), typeof(CornerLayout), propertyChanged: ViewPropertyChanged);
-        public static BindableProperty LowerLeftViewProperty = BindableProperty.Create(nameof(LowerLeftView), typeof(View), typeof(CornerLayout), propertyChanged: ViewPropertyChanged);
-        public static BindableProperty LowerRightViewProperty = BindableProperty.Create(nameof(LowerRightView), typeof(View), typeof(CornerLayout), propertyChanged: ViewPropertyChanged);
+        public static BindableProperty TopViewProperty = BindableProperty.Create(nameof(TopView), typeof(View), typeof(SemiStackLayout), propertyChanged:ViewPropertyChanged);
+        public static BindableProperty MiddleViewProperty = BindableProperty.Create(nameof(MiddleView), typeof(View), typeof(SemiStackLayout), propertyChanged: ViewPropertyChanged);
+        public static BindableProperty BottomViewProperty = BindableProperty.Create(nameof(BottomView), typeof(View), typeof(SemiStackLayout), propertyChanged: ViewPropertyChanged);
+        public static BindableProperty LowerRightViewProperty = BindableProperty.Create(nameof(LowerRightView), typeof(View), typeof(SemiStackLayout), propertyChanged: ViewPropertyChanged);
 
-        public View UpperLeftView
+        public View TopView
         {
-            get { return (View) GetValue(UpperLeftViewProperty); }
-            set { SetValue(UpperLeftViewProperty, value);}
+            get { return (View) GetValue(TopViewProperty); }
+            set { SetValue(TopViewProperty, value);}
         }
 
-        public View UpperRightView
+        public View MiddleView
         {
-            get { return (View)GetValue(UpperRightViewProperty); }
-            set { SetValue(UpperRightViewProperty, value); }
+            get { return (View)GetValue(MiddleViewProperty); }
+            set { SetValue(MiddleViewProperty, value); }
         }
 
-        public View LowerLeftView
+        public View BottomView
         {
-            get { return (View)GetValue(LowerLeftViewProperty); }
-            set { SetValue(LowerLeftViewProperty, value); }
+            get { return (View)GetValue(BottomViewProperty); }
+            set { SetValue(BottomViewProperty, value); }
         }
 
         public View LowerRightView
@@ -41,23 +41,49 @@ namespace CustomLayoutDemo.Layouts
 
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            if (UpperLeftView != null)
+            if (TopView != null)
             {
-                LayoutChildIntoBoundingRegion(UpperLeftView, new Rectangle(0, 0, 100, 100));
+                LayoutChildIntoBoundingRegion(TopView, new Rectangle(0, 0, 100, 100));
             }
-            if (UpperRightView != null)
+            if (MiddleView != null)
             {
-                LayoutChildIntoBoundingRegion(UpperRightView, new Rectangle(width - 100, 0, 100, 100));
+                LayoutChildIntoBoundingRegion(MiddleView, new Rectangle(width - 100, 0, 100, 100));
             }
-            if (LowerLeftView != null)
+            if (BottomView != null)
             {
-                LayoutChildIntoBoundingRegion(LowerLeftView, new Rectangle(0, height - 100, 100, 100));
+                LayoutChildIntoBoundingRegion(BottomView, new Rectangle(0, height - 100, 100, 100));
             }
             if (LowerRightView != null)
             {
                 var size = LowerRightView.Measure(100, 100, MeasureFlags.IncludeMargins);
                 LayoutChildIntoBoundingRegion(LowerRightView, new Rectangle(width - size.Request.Width, height - size.Request.Height, size.Request.Width, size.Request.Height));
             }
+        }
+
+        public Dictionary<View, Rectangle> NaiveLayout(double width, double height)
+        {
+            Dictionary<View, Rectangle> layout = new Dictionary<View, Rectangle>();
+
+            if (TopView != null)
+            {
+                var measure = TopView.Measure(width, height, MeasureFlags.IncludeMargins);
+                var rectangle = new Rectangle(0, 0, measure.Request.Width, measure.Request.Height);
+                layout[TopView] = rectangle;
+            }
+            if (MiddleView != null)
+            {
+                LayoutChildIntoBoundingRegion(MiddleView, new Rectangle(width - 100, 0, 100, 100));
+            }
+            if (BottomView != null)
+            {
+                LayoutChildIntoBoundingRegion(BottomView, new Rectangle(0, height - 100, 100, 100));
+            }
+            if (LowerRightView != null)
+            {
+                var size = LowerRightView.Measure(100, 100, MeasureFlags.IncludeMargins);
+                LayoutChildIntoBoundingRegion(LowerRightView, new Rectangle(width - size.Request.Width, height - size.Request.Height, size.Request.Width, size.Request.Height));
+            }
+            return layout;
         }
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
@@ -67,7 +93,7 @@ namespace CustomLayoutDemo.Layouts
 
         private static void ViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var layout = (CornerLayout) bindable;
+            var layout = (SemiStackLayout) bindable;
             var oldView = (View) oldValue;
             var newView = (View) newValue;
 
