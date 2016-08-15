@@ -6,11 +6,11 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsDemo.Views.ObservableViewModelDemoPage">
     <StackLayout>
-        <Slider Value="{Binding Red}" />
-        <Slider Value="{Binding Green}" />
-        <Slider Value="{Binding Blue}" />
+        <Slider Value="{Binding Red.Value}" />
+        <Slider Value="{Binding Green.Value}" />
+        <Slider Value="{Binding Blue.Value}" />
 
         <Label Text="{Binding ResultText}" />
-        <BoxView Color="{Binding ResultColor}" HeightRequest="100" />
+        <BoxView Color="{Binding ResultColor.Value}" HeightRequest="100" />
     </StackLayout>
 </ContentPage>

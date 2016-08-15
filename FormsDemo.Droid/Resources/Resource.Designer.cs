@@ -26,6 +26,8 @@ namespace FormsDemo.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Reactive.Bindings.Resource.String.ApplicationName = global::FormsDemo.Droid.Resource.String.ApplicationName;
+			global::Reactive.Bindings.Resource.String.Hello = global::FormsDemo.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::FormsDemo.Droid.Resource.Attribute.actionBarSize;
 		}
 		
@@ -3182,6 +3184,12 @@ namespace FormsDemo.Droid
 		
 		public partial class String
 		{
+			
+			// aapt resource value: 0x7f060046
+			public const int ApplicationName = 2131099718;
+			
+			// aapt resource value: 0x7f060045
+			public const int Hello = 2131099717;
 			
 			// aapt resource value: 0x7f06002e
 			public const int abc_action_bar_home_description = 2131099694;
