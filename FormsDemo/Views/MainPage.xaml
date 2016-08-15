@@ -16,6 +16,9 @@
         <Button Text="Reactive Demo"
                 Command="{Binding DisplayPageCommand}"
                 CommandParameter="ObservableDemoPage" />
+      <Button Text="Reactive MVVM Demo"
+                Command="{Binding DisplayPageCommand}"
+                CommandParameter="ObservableViewModelDemoPage" />
         <Button Text="Reactive Async Demo"
                 Command="{Binding DisplayPageCommand}"
                 CommandParameter="ObservableAsyncDemoPage" />

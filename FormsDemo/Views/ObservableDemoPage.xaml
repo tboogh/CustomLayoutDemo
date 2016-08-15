@@ -5,11 +5,11 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsDemo.Views.ObservableDemoPage">
   <StackLayout>
-    <Slider x:Name="RedSlider"></Slider>
-    <Slider x:Name="GreenSlider"></Slider>
-    <Slider x:Name="BlueSlider"></Slider>
+    <Slider x:Name="RedSlider" Value="{Binding Red.Value}"></Slider>
+    <Slider x:Name="GreenSlider" Value="{Binding Blue.Value}"></Slider>
+    <Slider x:Name="BlueSlider" Value="{Binding Green.Value}"></Slider>
     
     <Label x:Name="ResultText"></Label>
-    <BoxView x:Name="BoxView" HeightRequest="100"></BoxView>
+    <BoxView x:Name="BoxView" HeightRequest="100" Color="{Binding ResultColor.Value}"></BoxView>
   </StackLayout>
 </ContentPage>
