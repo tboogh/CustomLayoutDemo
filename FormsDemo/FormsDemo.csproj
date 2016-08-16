@@ -36,6 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Common\Views\SampleGridView.cs" />
     <Compile Include="Layouts\CornerLayout.cs" />
     <Compile Include="Layouts\SemiStackLayout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
