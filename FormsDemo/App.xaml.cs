@@ -24,6 +24,7 @@ namespace FormsDemo
             Container.RegisterTypeForNavigation<ObservableDemoPage>();
             Container.RegisterTypeForNavigation<ObservableAsyncDemoPage>();
             Container.RegisterTypeForNavigation<ObservableViewModelDemoPage, ObservableViewModelDemoViewModel>();
+            Container.RegisterTypeForNavigation<SampleGridViewPage>();
         }
     }
 }

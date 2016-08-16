@@ -2653,6 +2653,9 @@ namespace FormsDemo.Droid
 			// aapt resource value: 0x7f07004d
 			public const int textSpacerNoButtons = 2131165261;
 			
+			// aapt resource value: 0x7f070099
+			public const int textView = 2131165337;
+			
 			// aapt resource value: 0x7f070091
 			public const int time = 2131165329;
 			
@@ -2662,8 +2665,8 @@ namespace FormsDemo.Droid
 			// aapt resource value: 0x7f070048
 			public const int title_template = 2131165256;
 			
-			// aapt resource value: 0x7f070099
-			public const int toolbar = 2131165337;
+			// aapt resource value: 0x7f07009a
+			public const int toolbar = 2131165338;
 			
 			// aapt resource value: 0x7f070032
 			public const int top = 2131165234;
@@ -2936,7 +2939,10 @@ namespace FormsDemo.Droid
 			public const int tabs = 2130903095;
 			
 			// aapt resource value: 0x7f030038
-			public const int toolbar = 2130903096;
+			public const int textRowItem = 2130903096;
+			
+			// aapt resource value: 0x7f030039
+			public const int toolbar = 2130903097;
 			
 			static Layout()
 			{

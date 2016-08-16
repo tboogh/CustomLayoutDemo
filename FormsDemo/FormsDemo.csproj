@@ -57,6 +57,9 @@
     <Compile Include="Views\ObservableViewModelDemoPage.xaml.cs">
       <DependentUpon>ObservableViewModelDemoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SampleGridViewPage.xaml.cs">
+      <DependentUpon>SampleGridViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SemiStackLayoutPage.xaml.cs">
       <DependentUpon>SemiStackLayoutPage.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\SampleGridViewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!--<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />-->

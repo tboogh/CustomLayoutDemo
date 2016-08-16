@@ -22,6 +22,9 @@
         <Button Text="Reactive Async Demo"
                 Command="{Binding DisplayPageCommand}"
                 CommandParameter="ObservableAsyncDemoPage" />
+      <Button Text="Sample Grid"
+                Command="{Binding DisplayPageCommand}"
+                CommandParameter="SampleGridViewPage" />
     </StackLayout>
 
 </ContentPage>
