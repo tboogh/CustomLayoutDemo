@@ -1,2 +1,3 @@
 # FormsDemo
-Demo of practices for Xamarin Forms Apps
+My personal Xamarin SandBox
+---
