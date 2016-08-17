@@ -6,6 +6,6 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsDemo.Views.SampleGridViewPage">
   <AbsoluteLayout >
-    <views:SampleGridView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"></views:SampleGridView>
+    <views:SampleGridView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" ItemSource="{Binding People}"></views:SampleGridView>
   </AbsoluteLayout>
 </ContentPage>

@@ -1,7 +1,9 @@
 ﻿using FormsDemo.Layouts;
+using FormsDemo.Services;
 using FormsDemo.ViewModels;
 using Prism.Unity;
 using FormsDemo.Views;
+using Microsoft.Practices.Unity;
 using Xamarin.Forms;
 
 namespace FormsDemo
@@ -25,6 +27,8 @@ namespace FormsDemo
             Container.RegisterTypeForNavigation<ObservableAsyncDemoPage>();
             Container.RegisterTypeForNavigation<ObservableViewModelDemoPage, ObservableViewModelDemoViewModel>();
             Container.RegisterTypeForNavigation<SampleGridViewPage>();
+
+            Container.RegisterType<IHttpService, HttpService>();
         }
     }
 }

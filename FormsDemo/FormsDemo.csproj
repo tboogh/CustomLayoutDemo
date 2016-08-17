@@ -40,10 +40,12 @@
     <Compile Include="Layouts\CornerLayout.cs" />
     <Compile Include="Layouts\SemiStackLayout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IHttpService.cs" />
     <Compile Include="Services\ISlowService.cs" />
     <Compile Include="Services\SlowService.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ObservableViewModelDemoViewModel.cs" />
+    <Compile Include="ViewModels\SampleGridViewPageViewModel.cs" />
     <Compile Include="ViewModels\SemiStackLayoutViewModel.cs" />
     <Compile Include="Views\CornerLayoutPage.xaml.cs">
       <DependentUpon>CornerLayoutPage.xaml</DependentUpon>

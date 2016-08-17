@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -33,6 +34,16 @@ namespace FormsDemo.Droid.Renderers
             }
         }
 
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+            if (e.PropertyName == "ItemSource")
+            {
+                var names = Element.ItemSource.Select(x => $"{x.Name.First} {x.Name.Last}").ToArray();
+                _adapter.UpdateDataSet(names);
+            }
+        }
+
         protected override RecyclerView CreateNativeControl()
         {
             _recyclerView = new RecyclerView(Context);
@@ -60,13 +71,6 @@ namespace FormsDemo.Droid.Renderers
 
         public class ReyclerAdapter : RecyclerView.Adapter
         {
-            private readonly string[] _dataSet;
-
-            public ReyclerAdapter(string[] dataSet)
-            {
-                _dataSet = dataSet;
-            }
-
             public class ViewHolder : RecyclerView.ViewHolder
             {
                 public ViewHolder(View itemView) : base(itemView)
@@ -77,6 +81,19 @@ namespace FormsDemo.Droid.Renderers
                 public TextView TextView { get; }
             }
 
+            private string[] _dataSet;
+
+            public ReyclerAdapter(string[] dataSet)
+            {
+                _dataSet = dataSet;
+            }
+
+            public void UpdateDataSet(string[] dataset)
+            {
+                _dataSet = dataset;
+                NotifyDataSetChanged();
+                
+            }
             public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
             {
                 var viewHolder = (ViewHolder)holder;
