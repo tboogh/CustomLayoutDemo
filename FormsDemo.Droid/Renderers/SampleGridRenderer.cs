@@ -33,13 +33,6 @@ namespace FormsDemo.Droid.Renderers
             }
         }
 
-        public override SizeRequest GetDesiredSize(int widthConstraint, int heightConstraint)
-        {
-            var size = base.GetDesiredSize(widthConstraint, heightConstraint);
-            //return new SizeRequest(new Size(widthConstraint, 500));
-            return size;
-        }
-
         protected override RecyclerView CreateNativeControl()
         {
             _recyclerView = new RecyclerView(Context);
@@ -57,7 +50,7 @@ namespace FormsDemo.Droid.Renderers
 
         public string[] GenerateDataSet()
         {
-            var data = new string[100];
+            var data = new string[100000];
             for (int i = 0; i < data.Length; ++i)
             {
                 data[i] = $"Data_{i}";
