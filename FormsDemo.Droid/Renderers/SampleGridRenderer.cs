@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,12 @@ using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using FFImageLoading;
+using FFImageLoading.Transformations;
+using FFImageLoading.Views;
 using FormsDemo.Common.Views;
 using FormsDemo.Droid.Renderers;
+using FormsDemo.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using View = Android.Views.View;
@@ -39,8 +44,7 @@ namespace FormsDemo.Droid.Renderers
             base.OnElementPropertyChanged(sender, e);
             if (e.PropertyName == "ItemSource")
             {
-                var names = Element.ItemSource.Select(x => $"{x.Name.First} {x.Name.Last}").ToArray();
-                _adapter.UpdateDataSet(names);
+                _adapter.UpdateDataSet(Element.ItemSource);
             }
         }
 
@@ -51,23 +55,14 @@ namespace FormsDemo.Droid.Renderers
             _recyclerView.HasFixedSize = true;
 
             //LinearLayoutManager layoutManager = new LinearLayoutManager(Context);
-            GridLayoutManager layoutManager = new GridLayoutManager(Context, 2);
+            GridLayoutManager layoutManager = new GridLayoutManager(Context, 3);
             _recyclerView.SetLayoutManager(layoutManager);
 
-            _adapter = new ReyclerAdapter(GenerateDataSet());
+            _adapter = new ReyclerAdapter();
             _recyclerView.SetAdapter(_adapter);
             return _recyclerView;
         }
 
-        public string[] GenerateDataSet()
-        {
-            var data = new string[100000];
-            for (int i = 0; i < data.Length; ++i)
-            {
-                data[i] = $"Data_{i}";
-            }
-            return data;
-        }
 
         public class ReyclerAdapter : RecyclerView.Adapter
         {
@@ -76,19 +71,26 @@ namespace FormsDemo.Droid.Renderers
                 public ViewHolder(View itemView) : base(itemView)
                 {
                     TextView = itemView.FindViewById<TextView>(Resource.Id.textView);
+                    ImageView = itemView.FindViewById<ImageViewAsync>(Resource.Id.imageView);
                 }
 
                 public TextView TextView { get; }
+                public ImageViewAsync ImageView { get; }
             }
 
-            private string[] _dataSet;
+            private ObservableCollection<Person> _dataSet;
 
-            public ReyclerAdapter(string[] dataSet)
+            public ReyclerAdapter(ObservableCollection<Person> dataSet)
             {
                 _dataSet = dataSet;
             }
 
-            public void UpdateDataSet(string[] dataset)
+            public ReyclerAdapter()
+            {
+                _dataSet = new ObservableCollection<Person>();
+            }
+
+            public void UpdateDataSet(ObservableCollection<Person> dataset)
             {
                 _dataSet = dataset;
                 NotifyDataSetChanged();
@@ -98,7 +100,13 @@ namespace FormsDemo.Droid.Renderers
             {
                 var viewHolder = (ViewHolder)holder;
 
-                viewHolder?.TextView.SetText(_dataSet[position], TextView.BufferType.Normal);
+                var person = _dataSet[position];
+
+                viewHolder?.TextView.SetText($"{person.Name.First} {person.Name.Last}", TextView.BufferType.Normal);
+                if (viewHolder != null)
+                    ImageService.Instance.LoadUrl(person.Picture.Thumbnail)
+                        .Transform(new CircleTransformation())
+                        .IntoAsync(viewHolder.ImageView);
             }
 
             public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup viewGroup, int viewType)
@@ -110,7 +118,7 @@ namespace FormsDemo.Droid.Renderers
                 return viewHolder;
             }
 
-            public override int ItemCount => _dataSet.Length;
+            public override int ItemCount => _dataSet.Count;
         }
     }
 }
