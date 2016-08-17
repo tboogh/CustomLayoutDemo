@@ -13,6 +13,10 @@ namespace FormsDemo.iOS.Interface
         {
             var imageView = new UIImageView();
             var label = new UILabel();
+            label.TranslatesAutoresizingMaskIntoConstraints = false;
+            imageView.TranslatesAutoresizingMaskIntoConstraints = false;
+            Label = label;
+            ImageView = imageView;
 
             ContentView.AddSubview(imageView);
             ContentView.AddSubview(label);
@@ -22,6 +26,7 @@ namespace FormsDemo.iOS.Interface
                 NSLayoutConstraint.Create(label, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Bottom, 1, 0),
                 NSLayoutConstraint.Create(label, NSLayoutAttribute.Left, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Left, 1, 0),
                 NSLayoutConstraint.Create(label, NSLayoutAttribute.Right, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Right, 1, 0),
+                NSLayoutConstraint.Create(label, NSLayoutAttribute.Height, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Height, 0.3f, 0),
                 NSLayoutConstraint.Create(imageView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Top, 1, 0),
                 NSLayoutConstraint.Create(imageView, NSLayoutAttribute.Left, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Left, 1, 0),
                 NSLayoutConstraint.Create(imageView, NSLayoutAttribute.Right, NSLayoutRelation.Equal, ContentView, NSLayoutAttribute.Right, 1, 0),

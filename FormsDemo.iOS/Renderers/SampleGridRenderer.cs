@@ -36,8 +36,10 @@ namespace FormsDemo.iOS.Renderers
         private UICollectionView CreateNativeControl()
         {
             var uiCollectionView = new UICollectionView(new CGRect(0, 0, 100, 100), new UICollectionViewFlowLayout());
+            uiCollectionView.BackgroundColor = UIColor.White;
             _peopleDataSource = _peopleDataSource ?? new PeopleDataSource();
-            uiCollectionView.Source = _peopleDataSource;
+            uiCollectionView.DataSource = _peopleDataSource;
+            uiCollectionView.Delegate = new PeopleDelegate();
             uiCollectionView.RegisterClassForCell(typeof(PeopleCollectionViewCell), PersonCellIdentifier);
             return uiCollectionView;
         }
@@ -53,7 +55,15 @@ namespace FormsDemo.iOS.Renderers
         }
     }
 
-    public class PeopleDataSource : UICollectionViewSource
+    public class PeopleDelegate : UICollectionViewDelegateFlowLayout
+    {
+        public override CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
+        {
+            return new CGSize(200, 200);
+        }
+    }
+
+    public class PeopleDataSource : UICollectionViewDataSource
     {
         public ObservableCollection<Person> People { get; private set; }
 
@@ -61,6 +71,8 @@ namespace FormsDemo.iOS.Renderers
         {
             People = dataSet;
         }
+
+
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
